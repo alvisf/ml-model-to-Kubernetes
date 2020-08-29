@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: model-deployment
+  labels:
+    app: model-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: model-pod
+
+  template:
+    metadata:
+      name: model-pod
+      labels:
+        app: model-pod
+
+    spec:
+      containers:
+        - name: model-container
+          image: backendvm
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5001
